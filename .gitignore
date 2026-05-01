@@ -1,0 +1,62 @@
+# ============================================================
+# SDC_Autoware 专用 gitignore (针对 Gemini AI 优化)
+# ============================================================
+
+# --- 1. AI 索引杀手：深度学习模型与权重 (最重要) ---
+# 屏蔽你 RT-Perception 目录下的所有 YOLO/PyTorch 权重
+*.pt
+*.pth
+*.weights
+*.onnx
+*.engine
+*.tensorrt
+*.pb
+*.h5
+
+# --- 2. 自动驾驶大数据文件 ---
+# 屏蔽点云数据、ROS Bag 包和仿真轨迹
+*.pcd
+*.mcap
+*.bag
+*.trc
+*.log
+*.csv
+
+# --- 3. 编译产物与缓存 (Windows/Linux 通用) ---
+# 屏蔽 Colcon/CMake 产生的中间文件夹
+build/
+install/
+log/
+__pycache__/
+evito/
+citaro/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.ipynb_checkpoints/
+
+# --- 4. 驱动与资源文件 (针对 ZED 和 Fixposition) ---
+# 如果这些目录下有非代码的大型资源，建议屏蔽
+zed-ros2-wrapper/resources/
+fixposition_driver/docs/
+
+# --- 5. 开发环境与系统文件 ---
+.venv/
+venv/
+.env
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.clangd/
+compile_commands.json
+.colcon_workspace
+
+
+# --- 6. 实验数据目录 ---
+# 如果你有专门存放训练集或测试结果的文件夹，取消注释下面两行
+# /data/
+# /results/
