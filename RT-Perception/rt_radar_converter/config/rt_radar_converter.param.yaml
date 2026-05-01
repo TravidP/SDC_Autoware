@@ -1,0 +1,4 @@
+/**:
+  ros__parameters:
+    use_fixed_object_width: true
+    fixed_object_width: 0.25

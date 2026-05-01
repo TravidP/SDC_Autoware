@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+        <node pkg="object_detection_bridge" exec="object_detection_yolo_bridge" name="object_detection_yolo_bridge" output="screen"/>
+</launch>

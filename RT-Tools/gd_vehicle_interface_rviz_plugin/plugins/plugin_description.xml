@@ -1,0 +1,9 @@
+<library path="gd_vehicle_interface_rviz_plugin">
+
+  <class
+    type="rviz_plugins::GDVehicleInterfacePanel"
+    base_class_type="rviz_common::Panel">
+    <description>GDVehicleInterfacePanel</description>
+  </class>
+
+</library>

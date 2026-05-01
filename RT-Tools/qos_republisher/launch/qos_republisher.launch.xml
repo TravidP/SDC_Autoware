@@ -1,0 +1,30 @@
+<launch>
+    <arg name="input_topic" default="chatter"/>
+    <arg name="output_topic" default="chatter_repub"/>
+  
+    <arg name="input_reliability" default="reliable"/>
+    <arg name="input_durability" default="volatile"/>
+    <arg name="input_history" default="keep_last"/>
+    <arg name="input_depth" default="10"/>
+  
+    <arg name="output_reliability" default="reliable"/>
+    <arg name="output_durability" default="volatile"/>
+    <arg name="output_history" default="keep_last"/>
+    <arg name="output_depth" default="10"/>
+  
+    <node pkg="qos_republisher" exec="qos_republisher_node" name="qos_republisher">
+      <param name="input_topic" value="$(var input_topic)" />
+      <param name="output_topic" value="$(var output_topic)" />
+  
+      <param name="input_qos.reliability" value="$(var input_reliability)" />
+      <param name="input_qos.durability" value="$(var input_durability)" />
+      <param name="input_qos.history" value="$(var input_history)" />
+      <param name="input_qos.depth" value="$(var input_depth)" />
+  
+      <param name="output_qos.reliability" value="$(var output_reliability)" />
+      <param name="output_qos.durability" value="$(var output_durability)" />
+      <param name="output_qos.history" value="$(var output_history)" />
+      <param name="output_qos.depth" value="$(var output_depth)" />
+    </node>
+  </launch>
+  

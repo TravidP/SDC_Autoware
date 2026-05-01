@@ -1,0 +1,29 @@
+<launch>
+  <!-- First instance -->
+  <include file="$(find-pkg-share autoware_topic_state_monitor)/launch/topic_state_monitor.launch.xml">
+    <arg name="node_name_suffix" value="msg" />
+    <arg name="topic" value="/msg" />
+    <arg name="topic_type" value="std_msgs/msg/String" />
+    <arg name="transient_local" value="true" />
+    <arg name="best_effort" value="false" />
+    <arg name="diag_name" value="msg_monitor" />
+    <arg name="warn_rate" value="20.0" />
+    <arg name="error_rate" value="1.0" />
+    <arg name="timeout" value="1.0" />
+    <arg name="window_size" value="15" />
+  </include>
+
+  <!-- Second instance -->
+  <include file="$(find-pkg-share autoware_topic_state_monitor)/launch/topic_state_monitor.launch.xml">
+    <arg name="node_name_suffix" value="bool" />
+    <arg name="topic" value="/bool" />
+    <arg name="topic_type" value="std_msgs/msg/Bool" />
+    <arg name="transient_local" value="false" />
+    <arg name="best_effort" value="false" />
+    <arg name="diag_name" value="bool_monitor" />
+    <arg name="warn_rate" value="30.0" />
+    <arg name="error_rate" value="15.0" />
+    <arg name="timeout" value="3.0" />
+    <arg name="window_size" value="10" />
+  </include>
+</launch>

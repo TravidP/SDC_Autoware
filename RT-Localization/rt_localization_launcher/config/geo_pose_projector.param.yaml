@@ -1,0 +1,5 @@
+/**:
+  ros__parameters:
+    publish_tf: true
+    parent_frame: "map"
+    child_frame: "gnss_fp_poi"

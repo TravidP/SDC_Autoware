@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' generator='JOSM'>
+  <node id='-25366' action='modify' visible='true' lat='51.98388152894' lon='5.66667685782'>
+    <tag k='ele' v='0.0' />
+  </node>
+  <node id='-25367' action='modify' visible='true' lat='51.98337928375' lon='5.66705652783'>
+    <tag k='ele' v='0.0' />
+  </node>
+  <node id='-25409' action='modify' visible='true' lat='51.98389971381' lon='5.66674354227'>
+    <tag k='ele' v='0.0' />
+  </node>
+  <node id='-25410' action='modify' visible='true' lat='51.98339912077' lon='5.6671245534'>
+    <tag k='ele' v='0.0' />
+  </node>
+  <way id='-624' action='modify' visible='true'>
+    <nd ref='-25366' />
+    <nd ref='-25367' />
+    <tag k='subtype' v='solid' />
+    <tag k='type' v='line_thin' />
+  </way>
+  <way id='-627' action='modify' visible='true'>
+    <nd ref='-25409' />
+    <nd ref='-25410' />
+    <tag k='subtype' v='solid' />
+    <tag k='type' v='line_thin' />
+  </way>
+  <relation id='-60' action='modify' visible='true'>
+    <member type='way' ref='-624' role='right' />
+    <member type='way' ref='-627' role='left' />
+    <tag k='location' v='urban' />
+    <tag k='one_way' v='yes' />
+    <tag k='region' v='de' />
+    <tag k='subtype' v='road' />
+    <tag k='type' v='lanelet' />
+  </relation>
+</osm>

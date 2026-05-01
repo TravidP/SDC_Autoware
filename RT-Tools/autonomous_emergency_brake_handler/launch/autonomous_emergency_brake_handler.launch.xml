@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="autonomous_emergency_brake_handler" exec="autonomous_emergency_brake_handler" name="autonomous_emergency_brake_handler" output="screen">
+    <param from="$(find-pkg-share autonomous_emergency_brake_handler)/config/autonomous_emergency_brake_handler.param.yaml"/>
+  </node>
+</launch>

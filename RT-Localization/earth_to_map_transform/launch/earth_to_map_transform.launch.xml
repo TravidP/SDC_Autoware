@@ -1,0 +1,7 @@
+<launch>
+    <arg name="lookup_timeout" default="5.0" description="This value sets how long the program will wait (in seconds) for the transform to be available before timing out"/>
+
+    <node pkg="earth_to_map_transform" exec="earth2map_transform" name="earth2map_transform" output="screen">
+        <param name="lookup_timeout" value="$(var lookup_timeout)"/>
+    </node>
+</launch>

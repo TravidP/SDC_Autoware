@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="parking_pointcloud_publisher" exec="parking_pointcloud_publisher" name="parking_pointcloud_publisher" output="screen">
+    <param from="$(find-pkg-share parking_pointcloud_publisher)/config/parking_pointcloud_publisher.param.yaml"/>
+  </node>
+</launch>

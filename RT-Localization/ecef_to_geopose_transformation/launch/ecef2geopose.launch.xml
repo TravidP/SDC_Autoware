@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="ecef_to_geopose_transformation" exec="ecef2geopose" name="ecef2geopose" output="screen">
+    <param from="$(find-pkg-share ecef_to_geopose_transformation)/config/ecef2geopose.param.yaml"/>
+  </node>
+</launch>

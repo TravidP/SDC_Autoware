@@ -1,0 +1,4 @@
+/**:
+  ros__parameters:
+    aeb_acceleration: -1.5
+    aeb_jerk: 0.0

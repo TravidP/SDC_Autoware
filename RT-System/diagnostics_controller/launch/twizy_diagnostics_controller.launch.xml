@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="diagnostics_controller" exec="diagnostics_controller" name="diagnostics_controller" output="screen">
+    <param from="$(find-pkg-share diagnostics_controller)/config/twizy_diagnostics_controller.param.yaml"/>
+  </node>
+</launch>

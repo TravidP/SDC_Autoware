@@ -1,0 +1,6 @@
+<launch>
+    <executable
+            cmd="$(find-pkg-share unity_ui_build)/unity_build/TouchScreenUI.x86_64"
+            output="screen">
+    </executable>
+</launch>

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="gd_kinematic_state_publisher" exec="gd_localization" name="gd_kinematic_state" output="screen">
+    <param from="$(find-pkg-share gd_kinematic_state_publisher)/config/gd_kinematic_state_publisher.param.yaml"/>
+  </node>
+</launch>

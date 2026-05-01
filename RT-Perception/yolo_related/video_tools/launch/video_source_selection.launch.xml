@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  
+  <arg name="video_source" default="rosbag2" description="Select the video source selection. Options are rosbag2 or camera"/>
+  <arg name="rosbag2_path" default="" description="The directory path where the ros2 bag file is located"/>
+  <arg name="rosbag2_topics" default="" description="Specifies the topics to play from the ros2 bag file. If you want to play all topics just leave it empty"/>
+  <arg name="svo_path" default="" description="The directory path where the svo file is located. If you want to stream live with camera just leave it empty"/>
+
+  <group if="$(eval &quot;'$(var video_source)'=='rosbag2'&quot;)">
+    <include file="$(find-pkg-share video_tools)/launch/rosbag2_play.launch.py">
+      <arg name="rosbag2_path" value="$(var rosbag2_path)"/>
+    </include>
+  </group>
+
+  <group if="$(eval &quot;'$(var video_source)'=='camera'&quot;)">
+    <include file="$(find-pkg-share video_tools)/launch/zed_camera_video.launch.xml">
+      <arg name="svo_path" value="$(var svo_path)"/>
+    </include>
+  </group>
+  
+</launch>
+
+

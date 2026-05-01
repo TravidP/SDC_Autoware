@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Capture the environment variable from the system and set it as a launch variable -->
+  <let name="VEHICLE" value="$(env VEHICLE)"/>
+  <log message="Launching configuration for $(var VEHICLE)"/>
+
+  <arg name="vehicle_model" default="$(var VEHICLE)_vehicle" description="Vehicle model name"/>
+
+  <include file="$(find-pkg-share autoware_global_parameter_loader)/launch/global_params.launch.py">
+    <arg name="vehicle_model" value="$(var vehicle_model)"/>
+  </include>
+
+  <!-- If VEHICLE variable exists then it uses a named parameter file, if not (for example during testing) the generic file is used -->
+  <let name="rt_route_generator_param_file" value="$(find-pkg-share rt_route_generator)/config/rt_route_generator_$(var VEHICLE).param.yaml" if="$(eval '&quot;$(var VEHICLE)&quot; != &quot;&quot;')"/>
+  <let name="rt_route_generator_param_file" value="$(find-pkg-share rt_route_generator)/config/rt_route_generator.param.yaml" unless="$(eval '&quot;$(var VEHICLE)&quot; != &quot;&quot;')"/>
+
+  <node pkg="rt_route_generator" exec="route_generator" name="route_generator" output="screen">
+    <param from="$(var rt_route_generator_param_file)"/>
+  </node>
+
+  <node pkg="xsens_transform" exec="xsens_transform" name="xsens_transform" output="screen"/>
+
+</launch>

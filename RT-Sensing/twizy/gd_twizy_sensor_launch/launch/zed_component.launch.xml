@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Arguments -->
+    <arg name="camera_name" default="zed"/>
+    <arg name="camera_model" default="zed2i"/>
+    <arg name="namespace" default="$(var camera_name)"/>
+    <arg name="node_name" default="zed_node"/>
+    <arg name="config_common_path" default="$(find-pkg-share zed_wrapper)/config/common_stereo.yaml"/>
+    <arg name="config_camera_path" default="$(find-pkg-share zed_wrapper)/config/zed2.yaml"/>
+    <arg name="config_ffmpeg_path" default="$(find-pkg-share zed_wrapper)/config/ffmpeg.yaml"/>
+    <arg name="container_name" default="pointcloud_pipeline"/>
+    <arg name="use_sim_time" default="false"/>
+    <arg name="log_level" default="info"/>
+
+
+    <!-- Launch a container -->
+    <group>
+        <push-ros-namespace namespace="sensing"/>
+        <!-- Container definition -->
+        <node_container name="$(var container_name)" pkg="rclcpp_components" exec="component_container_mt" namespace="">
+            <param name="use_sim_time" value="$(var use_sim_time)"/>
+            <env name="RCUTILS_LOGGING_LEVEL" value="$(var log_level)"/>
+
+            <composable_node pkg="zed_components" plugin="stereolabs::ZedCamera" name="camera_component">
+                <param name="camera_model" value="zed2i"/>
+                <param from="$(find-pkg-share gd_twizy_sensor_launch)/config/zed2i/common.yaml"/>
+                <param from="$(find-pkg-share gd_twizy_sensor_launch)/config/zed2i/zed2i.yaml"/>
+                <param from="$(var config_ffmpeg_path)"/>
+            </composable_node>
+        </node_container>
+    </group>
+
+    <!-- Camera Robot State Publisher -->
+    <arg name="xacro_path" default="$(find-pkg-share zed_wrapper)/urdf/zed_descr.urdf.xacro"/>
+    <arg name="publish_urdf" default="true"/>
+
+    <include file="$(find-pkg-share gd_twizy_sensor_launch)/launch/zed_rsp.launch.py">
+        <arg name="camera_name" value="$(var camera_name)"/>
+        <arg name="camera_model" value="$(var camera_model)"/>
+        <arg name="namespace" value="$(var namespace)"/>
+        <arg name="xacro_path" value="$(var xacro_path)"/>
+        <arg name="publish_urdf" value="$(var publish_urdf)"/>
+    </include>
+
+
+</launch>
+
+ 

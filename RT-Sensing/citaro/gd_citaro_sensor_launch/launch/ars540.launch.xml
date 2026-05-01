@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- re-publish the velocity field of /fixposition/fpa/odomsh to nebula/odometry_input -->
+    <node pkg="topic_tools"
+          exec="relay_field"
+          name="rt_odometry_relay"
+          output="screen"
+          args="/fixposition/fpa/odomsh
+                nebula/odometry_input
+                geometry_msgs/msg/TwistWithCovarianceStamped
+                '{header: m.header, twist: m.velocity}'
+                --wait-for-start
+                --qos-profile sensor_data"/>
+
+    <group>
+        <push_ros_namespace namespace="nebula"/>
+        <include file="$(find-pkg-share nebula_ros)/launch/continental_launch_all_hw.xml">
+            <arg name="sensor_ip" value="10.13.1.113"/>
+            <arg name="sensor_model" value="ARS548"/>
+            <arg name="odometry_topic" value="odometry_input"/>
+
+            <!-- Warning: these parameters are loaded into the Nebula Continental ROS2 nodes,
+                 but they aren't automatically applied onto the radar. To apply new
+                 parameters to the radar, use the /set_vehicle_parameters service
+                 provided by Nebula through the /continental_ars548_hw_driver node -->
+            <arg name="configuration_vehicle_length" value="12.17"/>
+            <arg name="configuration_vehicle_width" value="2.55"/>
+            <arg name="configuration_vehicle_height" value="3.095"/>
+            <arg name="configuration_vehicle_wheelbase" value="6.035"/>
+        </include>
+    </group>
+</launch>

@@ -1,0 +1,9 @@
+/**:
+  ros__parameters:
+    length: 4.0 #[m] default: 1 
+    width: 8.0 #[m] default: 1
+    height: 2.0 #[m] default: 1
+    number_of_points_per_edge: 150 # self-evident
+    frame: "viewer" # frame in which the pointcloud will be published
+    translation: [4.5, -3.6, 0.0] #[m] x,y,z translation of the pointcloud with respect to provided frame
+    theta: 1.91986 #[rad] rotation of the pointcloud around the z-axis of the given frame

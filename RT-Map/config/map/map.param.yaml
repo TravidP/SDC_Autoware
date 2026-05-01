@@ -1,0 +1,7 @@
+/**:
+  ros__parameters:
+    allow_unsupported_version: true
+    map_frame: map
+    viewer_frame: viewer
+    center_line_resolution: 5.0
+    use_waypoints: true

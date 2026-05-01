@@ -1,0 +1,15 @@
+base_link:
+  camera_link:
+    x: 8.84
+    y: 0.0
+    z: 0.84
+    roll: 0.0
+    pitch: 0.0
+    yaw: 0.0
+  gnss_link:
+    x: 8.830
+    y: 0.0
+    z: 2.3
+    roll: 0.0
+    pitch: 0.0
+    yaw: 0.0

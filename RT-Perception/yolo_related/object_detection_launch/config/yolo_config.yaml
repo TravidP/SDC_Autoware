@@ -1,0 +1,18 @@
+yolo:
+  default_params:
+    # model: "yolov8m.pt"
+    model: "best2026.pt"
+    tracker: "bytetrack.yaml"
+    device: "cuda:0"
+    enable: "True"
+    threshold: "0.5"
+    image_reliability: "2" # Choices: 0=system default, 1=Reliable, 2=Best Effort
+    depth_image_reliability: "2" # Choices: 0=system default, 1=Reliable, 2=Best Effort
+    depth_info_reliability: "2" # Choices: 0=system default, 1=Reliable, 2=Best Effort
+    depth_image_units_divisor: "100"
+    maximum_detection_threshold: "0.3"
+  remapped_topics:
+    input_image_topic: "/zed/zed_node/rgb_raw/image_raw_color"
+    input_depth_info_topic: "/zed/zed_node/depth/camera_info"
+    input_depth_topic: "/zed/zed_node/confidence/confidence_map"
+    target_frame: "map"

@@ -1,0 +1,11 @@
+/**:
+  ros__parameters:
+    input_frame: "base_link"
+    output_frame: "base_link"
+    min_x: -0.3
+    max_x: 2.0
+    min_y: -0.8
+    max_y: 0.8
+    min_z: 0.1
+    max_z: 2.0
+    negative: true

@@ -1,0 +1,17 @@
+# Some specs taked from https://ev-database.org/car/1615/Mercedes-Benz-eVito-Tourer-Long-90-kWh
+# Measurements in S.I.
+# For more info on measurements see pictures
+# Front and rear overhang was calculated as the avg of length - wheelbase
+# Tire info: 245 / 55 R 17
+/**:
+  ros__parameters:
+    wheel_radius: 0.35065 # The radius of the wheel, primarily used for dead reckoning.
+    wheel_width: 0.245 # The lateral width of a wheel tire, primarily used for dead reckoning.
+    wheel_base: 3.200 # between front wheel center and rear wheel center
+    wheel_tread: 1.667 # between left wheel center and right wheel center
+    front_overhang: 0.972 # between front wheel center and vehicle front
+    rear_overhang: 0.972 # between rear wheel center and vehicle rear
+    left_overhang: 0.2805 # between left wheel center and vehicle left
+    right_overhang: 0.2805 # between right wheel center and vehicle right
+    vehicle_height: 1.912
+    max_steer_angle: 0.418879 

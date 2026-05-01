@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Define arguments that can be passed when launching the file -->
+  <arg name="container_name" default="pointcloud_pipeline"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="log_level" default="info"/>
+
+  <!-- Launch a container -->
+  <group>
+    <push-ros-namespace namespace="sensing"/>
+    <!-- Container definition -->
+    <node_container name="$(var container_name)" pkg="rclcpp_components" exec="component_container_mt" namespace="">
+      <param name="use_sim_time" value="$(var use_sim_time)"/>
+      <env name="RCUTILS_LOGGING_LEVEL" value="$(var log_level)"/>
+
+      <!-- Laserscans transformed to pointclouds and published in base_link frame -->
+      <composable_node pkg="pointcloud_to_laserscan" plugin="pointcloud_to_laserscan::LaserScanToPointCloudNode" name="laserscan_to_pointcloud_left">
+        <remap from="scan_in" to="/scan_left"/>
+        <remap from="cloud" to="cloud_left"/>
+        <param from="$(find-pkg-share gd_twizy_sensor_launch)/config/laserscanner/laserscan_to_pointcloud_left.param.yaml"/>
+      </composable_node>
+
+      <composable_node pkg="pointcloud_to_laserscan" plugin="pointcloud_to_laserscan::LaserScanToPointCloudNode" name="laserscan_to_pointcloud_right">
+        <remap from="scan_in" to="/scan_right"/>
+        <remap from="cloud" to="cloud_right"/>
+        <param from="$(find-pkg-share gd_twizy_sensor_launch)/config/laserscanner/laserscan_to_pointcloud_right.param.yaml"/>
+      </composable_node>
+
+           <!-- Point type transformation of pointclouds that will be concatenated (This step is necessary for compatibility with the point-type that autoware expects and needs 
+           to be removed in the future) -->
+      <composable_node pkg="universal_point_transformer" plugin="universal_point_transformer::UniversalPointTransformerComponent" name="pointcloud_cropped_right_tr">
+        <remap from="points_raw" to="cloud_right"/>
+        <remap from="points_xyzirc" to="cloud_right_tr"/>
+      </composable_node>
+
+      <composable_node pkg="universal_point_transformer" plugin="universal_point_transformer::UniversalPointTransformerComponent" name="pointcloud_cropped_left_tr">
+        <remap from="points_raw" to="cloud_left"/>
+        <remap from="points_xyzirc" to="cloud_left_tr"/>
+      </composable_node>
+
+      <!-- Filtering out vehicle points from pointclouds -->
+      <composable_node pkg="autoware_pointcloud_preprocessor" plugin="autoware::pointcloud_preprocessor::CropBoxFilterComponent" name="pointcloud_cropped_left">
+        <param from="$(find-pkg-share gd_twizy_sensor_launch)/config/crop_box_vehicle.param.yaml"/>
+        <remap from="input" to="cloud_left_tr"/>
+        <remap from="output" to="cropped_cloud_left"/>
+      </composable_node>
+
+      <composable_node pkg="autoware_pointcloud_preprocessor" plugin="autoware::pointcloud_preprocessor::CropBoxFilterComponent" name="pointcloud_cropped_right">
+        <param from="$(find-pkg-share gd_twizy_sensor_launch)/config/crop_box_vehicle.param.yaml"/>
+        <remap from="input" to="cloud_right_tr"/>
+        <remap from="output" to="cropped_cloud_right"/>
+      </composable_node>
+
+      <!-- Voxel grid downsampling -->
+      <composable_node pkg="autoware_pointcloud_preprocessor" plugin="autoware::pointcloud_preprocessor::PickupBasedVoxelGridDownsampleFilterComponent" name="zed_pointcloud_voxelization">
+        <param from="$(find-pkg-share gd_twizy_sensor_launch)/config/downsample_filter_node.param.yaml"/>
+        <remap from="input" to="camera/pointcloud_ex"/>
+        <remap from="output" to="zed_voxel_out"/>
+      </composable_node>
+
+      <composable_node pkg="universal_point_transformer" plugin="universal_point_transformer::UniversalPointTransformerComponent" name="pointcloud_zed_tr">
+        <remap from="points_raw" to="zed_voxel_out"/>
+        <remap from="points_xyzirc" to="zed_cloud_tr"/>
+      </composable_node>
+
+      <!-- Pointcloud concatenation -->
+      <composable_node pkg="autoware_pointcloud_preprocessor" plugin="autoware::pointcloud_preprocessor::PointCloudConcatenateDataSynchronizerComponent" name="pointcloud_concatenation">
+        <param from="$(find-pkg-share gd_twizy_sensor_launch)/config/concatenate_and_timesync_pointclouds.param.yaml"/>
+        <remap from="output" to="time_sync_out"/>
+      </composable_node>
+
+      <!-- Filtering out area around the vehicle for the emergency brake-->
+      <composable_node pkg="autoware_pointcloud_preprocessor" plugin="autoware::pointcloud_preprocessor::CropBoxFilterComponent" name="pointcloud_AEB_crop1">
+        <remap from="input" to="time_sync_out"/>
+        <remap from="output" to="cropbox_aeb1"/>
+        <param from="$(find-pkg-share gd_twizy_sensor_launch)/config/crop_box_filter_aeb.param.yaml"/>
+      </composable_node>
+
+      <!-- Filtering out area around the vehicle for the emergency brake-->
+      <composable_node pkg="autoware_pointcloud_preprocessor" plugin="autoware::pointcloud_preprocessor::CropBoxFilterComponent" name="pointcloud_AEB_crop2">
+        <remap from="input" to="cropbox_aeb1"/>
+        <remap from="output" to="cropbox_aeb2"/>
+        <param from="$(find-pkg-share gd_twizy_sensor_launch)/config/crop_box_vehicle.param.yaml"/>
+      </composable_node>
+
+      <!-- Voxel grid downsampling -->
+      <composable_node pkg="autoware_pointcloud_preprocessor" plugin="autoware::pointcloud_preprocessor::PickupBasedVoxelGridDownsampleFilterComponent" name="pointcloud_voxelization">
+        <param from="$(find-pkg-share gd_twizy_sensor_launch)/config/downsample_filter_node.param.yaml"/>
+        <remap from="input" to="cropbox_aeb2"/>
+        <remap from="output" to="downsample_out"/>
+      </composable_node>
+
+      <!-- Filtering out area around the vehicle's immediate environment -->
+      <composable_node pkg="autoware_pointcloud_preprocessor" plugin="autoware::pointcloud_preprocessor::CropBoxFilterComponent" name="pointcloud_full_crop">
+        <remap from="input" to="downsample_out"/>
+        <remap from="output" to="cropbox_out"/>
+        <param from="$(find-pkg-share gd_twizy_sensor_launch)/config/crop_box_filter.param.yaml"/>
+      </composable_node>
+
+      <!-- Ground Segmentation - Part of perception originally, added here for hopefully better prfomrance -->
+      <composable_node pkg="autoware_ground_segmentation" plugin="autoware::ground_segmentation::RANSACGroundFilterComponent" name="pointcloud_no_ground">
+        <remap from="input" to="cropbox_out"/>
+        <remap from="output" to="/perception/obstacle_segmentation/pointcloud"/>
+        <param from="$(find-pkg-share gd_twizy_sensor_launch)/config/ransac_ground_filter.param.yaml"/>
+      </composable_node>
+    </node_container>
+  </group>
+</launch>

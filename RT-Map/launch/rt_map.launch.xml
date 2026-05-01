@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!-- This launch file aims to launch the following -->
+<!-- Bringup the map nodes and visualize on RVIZ-->
+
+<launch>
+    <let name="VEHICLE" value="$(env VEHICLE)"/>
+    <arg name="use_sim_time" default="false"/>
+    <log message="Launch configuration: Simulation" if="$(var use_sim_time)"/>
+    <log message="Launch configuration: Real Hardware" unless="$(var use_sim_time)"/>
+    
+    <arg name="launch_map" default="true" description="Whether to launch map"/>
+    <arg name="map_path" description="point cloud and lanelet2 map directory path"/>
+    <arg name="lanelet2_map_file" default="lanelet2_map.osm" description="lanelet2 map file name"/>
+    <arg name="lanelet2_map_path" default="$(var map_path)/$(var lanelet2_map_file)"/>
+    <arg name="map_projector_info_path" default="$(var map_path)/map_projector_info.yaml"/>
+    <arg name="map_param_path" default="$(find-pkg-share rt_map_launch)/config/map/map.param.yaml"/>
+
+    <!-- Map -->
+    <group if="$(var launch_map)">
+        <push-ros-namespace namespace="map"/>
+
+        <node pkg="autoware_map_tf_generator" exec="autoware_vector_map_tf_generator" name="vector_map_tf_generator" output="screen">
+            <param from="$(var map_param_path)"/>
+        </node>
+
+        <node pkg="autoware_map_loader" exec="autoware_lanelet2_map_loader" name="lanelet2_map_loader" output="screen">
+            <remap from="output/lanelet2_map" to="vector_map"/>
+            <param from="$(var map_param_path)"/>
+            <param name="lanelet2_map_path" value="$(var lanelet2_map_path)"/>
+        </node>
+
+        <node pkg="autoware_lanelet2_map_visualizer" exec="autoware_lanelet2_map_visualizer" name="autoware_lanelet2_map_visualizer" output="screen">
+            <remap from="input/lanelet2_map" to="vector_map"/>
+            <remap from="output/lanelet2_map_marker" to="vector_map_marker"/>
+        </node>
+
+        <node pkg="autoware_map_projection_loader" exec="autoware_map_projection_loader_node" name="map_projection_loader_node" output="screen">
+            <param name="map_projector_info_path" value="$(var map_projector_info_path)"/>
+            <param name="lanelet2_map_path" value="$(var lanelet2_map_path)"/>
+        </node>
+    </group>
+
+    <arg name="vehicle_model" default="$(var VEHICLE)_vehicle" description="vehicle model name"/>
+
+    <group scoped="false">
+    <include file="$(find-pkg-share autoware_global_parameter_loader)/launch/global_params.launch.py">
+      <arg name="use_sim_time" value="$(var use_sim_time)"/>
+      <arg name="vehicle_model" value="$(var vehicle_model)"/>
+    </include>
+  </group>
+    
+    <!-- Tools -->
+    <arg name="rviz" default="true" description="launch rviz"/>
+    <arg name="rviz_config" default="$(find-pkg-share rt_map_launch)/rviz/gd_autoware.rviz" description="greendino rviz config"/>
+    <arg name="rviz_respawn" default="true"/>
+
+    <!-- Tools -->
+    <group>
+        <node
+        pkg="rviz2"
+        exec="rviz2"
+        name="rviz2"
+        output="screen"
+        args="-d $(var rviz_config) -s $(find-pkg-share rt_map_launch)/rviz/image/rT_autoware.png"
+        if="$(var rviz)"
+        respawn="$(var rviz_respawn)"
+        />
+    </group>
+</launch>

@@ -1,0 +1,5 @@
+bool record # Request: true to start recording, false to stop recording.
+string rec_name # Name of the generated rosbag and subsequent map
+---
+bool success # Respose: true if request handled correctly.
+string message # Response: information about the result.

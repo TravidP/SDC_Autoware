@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  <arg name="enable_3d_object_detection" default="true" description="detection type. options are 2d and 3d"/>
+  <arg name="rviz" default="true" description="launch rviz"/>
+  <arg name="rviz_config" default="rviz/yolov8.rviz" description="rviz config"/>
+
+  <group if="$(var enable_3d_object_detection)">
+    <include file="$(find-pkg-share object_detection_launch)/launch/yolov8_3d.launch.py"/>
+  </group>
+  <group unless="$(var enable_3d_object_detection)">
+    <include file="$(find-pkg-share object_detection_launch)/launch/yolov8.launch.py"/>
+  </group>
+
+  <group if="$(var rviz)">
+    <node pkg="rviz2" exec="rviz2" name="rviz2" output="screen" args="-d $(find-pkg-share object_detection_launch)/$(var rviz_config)"/>
+  </group>
+  
+</launch>
+
+

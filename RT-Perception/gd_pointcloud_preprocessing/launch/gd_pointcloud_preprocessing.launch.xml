@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- Define the topic based on condition -->
+  <let name="pointcloud_topic" value="/zed/zed_node/point_cloud/cloud_registered" unless="$(var use_sim_time)"/>
+  <let name="pointcloud_topic" value="/sensing/camera/pointcloud_ex" if="$(var use_sim_time)"/>
+  <!-- Downsample the pointcloud using a voxel grid: only keep max 1 point in each voxel, discard the rest -->
+  <node pkg="autoware_pointcloud_preprocessor" exec="pickup_based_voxel_grid_downsample_filter_node" name="pickup_based_voxel_grid_downsample_filter_node" output="screen">
+
+    <remap from="input" to="$(var pointcloud_topic)"/>
+    <remap from="output" to="/gd_point_cloud/downsample_out"/>
+
+    <param from="$(find-pkg-share gd_pointcloud_preprocessing)/config/downsample_filter_node.param.yaml"/>
+  </node>
+
+  <node pkg="universal_point_transformer" exec="universal_point_transformer_node" name="zed_pointcloud_downsampled" output="screen">
+    <remap from="points_raw" to="/gd_point_cloud/downsample_out"/>
+    <remap from="points_xyzirc" to="/gd_point_cloud/downsample_out_tr"/>
+  </node>
+
+  <!-- Crop the pointcloud: discard all points that are outside of the defined box -->
+  <log message="use_sim_time: $(var use_sim_time)" />
+  <group if="$(var use_sim_time)">
+    <log message="Launch configuration: Simulation" />
+    <node pkg="autoware_pointcloud_preprocessor" exec="crop_box_filter_node" name="crop_box_filter_node" output="screen">
+      <remap from="input" to="/gd_point_cloud/downsample_out_tr"/>
+      <remap from="output" to="/gd_point_cloud/cropbox_out"/>
+      <param from="$(find-pkg-share gd_pointcloud_preprocessing)/config/crop_box_filter.param.yaml"/>
+      <param name="input_frame" value="zed_camera_center"/>
+    </node>
+  </group>
+  <group unless="$(var use_sim_time)">
+    <log message="Launch configuration: Real Hardware" />
+    <node pkg="autoware_pointcloud_preprocessor" exec="crop_box_filter_node" name="crop_box_filter_node" output="screen">
+      <remap from="input" to="/gd_point_cloud/downsample_out_tr"/>
+      <remap from="output" to="/gd_point_cloud/cropbox_out"/>
+      <param from="$(find-pkg-share gd_pointcloud_preprocessing)/config/crop_box_filter.param.yaml"/>
+    </node>
+  </group>
+
+  <!-- Remove the points from the pointcloud that are part of the ground -->
+  <node pkg="autoware_ground_segmentation" exec="ransac_ground_filter_node" name="ransac_ground_filter_node" output="screen">
+
+    <remap from="input" to="/gd_point_cloud/cropbox_out"/>
+    <remap from="output" to="/perception/obstacle_segmentation/pointcloud"/>
+
+    <param from="$(find-pkg-share gd_pointcloud_preprocessing)/config/ransac_ground_filter.param.yaml"/>
+  </node>
+</launch>

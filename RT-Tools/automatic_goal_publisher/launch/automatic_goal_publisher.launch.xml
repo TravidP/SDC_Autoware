@@ -1,0 +1,9 @@
+<launch>
+    <arg name="filename" default="/automatic_goal_publisher/config/goal_list.yaml" />
+    <arg name="distance_to_goal_upper_limit" default="20.0" />
+
+    <node pkg="automatic_goal_publisher" exec="publish_goal" name="publish_goal" output="screen">
+        <param name="filename" value="$(var filename)" />
+        <param name="distance_to_goal_upper_limit" value="$(var distance_to_goal_upper_limit)" />
+    </node>
+</launch>

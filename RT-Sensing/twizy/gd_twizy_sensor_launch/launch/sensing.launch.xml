@@ -1,0 +1,36 @@
+<launch>
+    <arg name="launch_gnss" default="true"/>
+    <arg name="launch_laserscanners" default="true"/>
+    <arg name="launch_pointcloud_pipeline" default="true"/>
+    <arg name="launch_robot_state_publisher" default="true" description="Whether to launch robot_state_publisher"/>
+    <arg name="vehicle_model" default="twizy_vehicle" description="vehicle model name"/>
+    <arg name="sensor_model" default="gd_twizy_sensor" description="sensor model name"/>
+    <arg name="config_dir" default="$(find-pkg-share $(var sensor_model)_description)/config" description="path to dir where sensors_calibration.yaml, etc. are located"/>
+    <arg name="xsens_config_path" default="$(find-pkg-share $(var sensor_model)_launch)/config/xsens/xsens.yaml" description="path to dir where xsens.yaml, etc. are located"/>
+                                    
+    <!-- BaseLink and sensor TFs -->
+    <group if="$(var launch_robot_state_publisher)">
+        <arg name="model_file" default="$(find-pkg-share tier4_vehicle_launch)/urdf/vehicle.xacro" description="path to the file of model settings (*.xacro)"/>
+        <node name="robot_state_publisher" pkg="robot_state_publisher" exec="robot_state_publisher">
+            <param name="robot_description" value="$(command 'xacro $(var model_file) vehicle_model:=$(var vehicle_model) sensor_model:=$(var sensor_model) config_dir:=$(var config_dir)' 'warn')"/>
+        </node>
+    </group>
+    
+    <!-- Gnss launch file -->
+    <group if="$(var launch_gnss)">
+        <include file="$(find-pkg-share gd_twizy_sensor_launch)/launch/xsens.launch.xml">
+            <arg name="config_path" value="$(var xsens_config_path)" />
+        </include>
+        <include file="$(find-pkg-share gd_twizy_sensor_launch)/launch/fppoi_baselink_tf.launch.py"/>
+    </group>
+
+    <group if="$(var launch_laserscanners)">
+        <include file="$(find-pkg-share gd_twizy_sensor_launch)/launch/laserscanner_right_baselink_tf.launch.py"/>
+        <include file="$(find-pkg-share gd_twizy_sensor_launch)/launch/laserscanner_left_baselink_tf.launch.py"/>
+    </group>
+
+    <group if="$(var launch_pointcloud_pipeline)">
+        <include file="$(find-pkg-share gd_twizy_sensor_launch)/launch/rt_sensing_pointcloud_pipeline.launch.xml"/>
+    </group>
+
+</launch>

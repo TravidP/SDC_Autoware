@@ -1,0 +1,8 @@
+/**:
+  ros__parameters:
+    model: "yolov8n.pt"
+    yaml_file: "pothole_dataset_config.yaml"
+    image_size: 640
+    epochs: 100
+    batch_size: 16
+    model_name: "new_yolov8_model"

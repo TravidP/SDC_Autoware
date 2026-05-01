@@ -1,0 +1,18 @@
+
+<launch>
+  <!-- Define arguments for configurable topic names -->
+  <arg name="input_topic" default="points_raw"/>
+  <arg name="output_topic" default="points_xyzirc"/>
+
+  <!-- Start the component container -->
+  <node pkg="rclcpp_components" exec="component_container" name="point_transformer_container" output="screen">
+  </node>
+
+  <!-- Load the universal_point_transformer component into the container -->
+  <load_composable_node target="point_transformer_container">
+    <composable_node pkg="universal_point_transformer" plugin="universal_point_transformer::UniversalPointTransformerComponent" name="universal_point_transformer_node">
+      <param name="input_topic" value="$(var input_topic)"/>
+      <param name="output_topic" value="$(var output_topic)"/>
+    </composable_node>
+  </load_composable_node>
+</launch>

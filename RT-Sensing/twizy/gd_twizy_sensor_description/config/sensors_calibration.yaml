@@ -1,0 +1,29 @@
+base_link:
+  camera_link:
+    x: 0.86
+    y: 0.0
+    z: 1.39
+    roll: 0.0
+    pitch: 0.0
+    yaw: 0.0
+  gnss_link:
+    x: 0.8
+    y: 0.0
+    z: 1.24
+    roll: 0.0
+    pitch: 0.0
+    yaw: 0.0
+  laserscanner_left:
+    x: -0.02
+    y: -0.57
+    z: 0.70
+    roll: 3.1415926536
+    pitch: 0.0
+    yaw: 0.0
+  laserscanner_right:
+    x: -0.02
+    y: 0.57
+    z: 0.70
+    roll: 0.0
+    pitch: 0.0
+    yaw: 0.0

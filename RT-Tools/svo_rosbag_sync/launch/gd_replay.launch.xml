@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="recording_directory"/>
+
+    <node name="svo_rosbag_sync" pkg="svo_rosbag_sync" exec="svo_rosbag_sync" output="screen" respawn="false">
+        <param name="bag_filename" value="$(var recording_directory)/rosbag/rosbag_0.db3"/>
+        <param name="timestamps_filename" value="$(var recording_directory)/zed_recording.svo2.timestamps"/>
+    </node>
+
+    <include file="$(find-pkg-share zed_wrapper)/launch/zed_camera.launch.py">
+        <arg name="camera_model" value="zed2i"/>
+        <arg name="svo_path" value="$(var recording_directory)/zed_recording.svo2"/>
+        <arg name="config_path" value="$(find-pkg-share gd_citaro_sensor_launch)/config/zed2i/common.yaml"/>
+        <arg name="publish_tf" value="false"/>
+    </include>
+</launch>
+

@@ -1,0 +1,4 @@
+bool create_map # Request: true to create map.
+---
+bool success # Respose: true if created correctly false if an issue occured.
+string message # Response: information about the result.

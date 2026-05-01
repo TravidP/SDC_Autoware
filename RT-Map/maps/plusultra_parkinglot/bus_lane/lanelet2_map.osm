@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' generator='JOSM'>
+  <node id='-33794' action='modify' visible='true' lat='51.98389681139' lon='5.66662671902' />
+  <node id='-33807' action='modify' visible='true' lat='51.98345114411' lon='5.66696498421' />
+  <node id='-33816' action='modify' visible='true' lat='51.98393413107' lon='5.66677715222' />
+  <node id='-33818' action='modify' visible='true' lat='51.98350118804' lon='5.66712127245' />
+  <way id='-1227' action='modify' visible='true'>
+    <nd ref='-33794' />
+    <nd ref='-33807' />
+    <tag k='subtype' v='solid' />
+    <tag k='type' v='line_thin' />
+  </way>
+  <way id='-1367' action='modify' visible='true'>
+    <nd ref='-33816' />
+    <nd ref='-33818' />
+    <tag k='subtype' v='solid' />
+    <tag k='type' v='line_thin' />
+  </way>
+  <relation id='-238' action='modify' visible='true'>
+    <member type='way' ref='-1227' role='right' />
+    <member type='way' ref='-1367' role='left' />
+    <tag k='location' v='urban' />
+    <tag k='one_way' v='yes' />
+    <tag k='region' v='de' />
+    <tag k='speed_limit' v='5' />
+    <tag k='subtype' v='road' />
+    <tag k='type' v='lanelet' />
+  </relation>
+</osm>

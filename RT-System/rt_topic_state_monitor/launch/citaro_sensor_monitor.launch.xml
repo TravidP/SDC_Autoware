@@ -1,0 +1,44 @@
+<launch>
+    <!-- Zed camera pointcloud monitor -->
+    <include file="$(find-pkg-share autoware_topic_state_monitor)/launch/topic_state_monitor.launch.xml">
+        <arg name="node_name_suffix" value="zed" />
+        <arg name="topic" value="/zed/zed_node/point_cloud/cloud_registered" />
+        <arg name="topic_type" value="sensor_msgs/msg/PointCloud2" />
+        <arg name="transient_local" value="false" />
+        <arg name="best_effort" value="true" />
+        <arg name="diag_name" value="ZED_pointcloud_monitor" />
+        <arg name="warn_rate" value="9.0" />
+        <arg name="error_rate" value="8.0" />
+        <arg name="timeout" value="0.5" />
+        <arg name="window_size" value="10" />
+    </include>
+
+    <!-- Fixposition odometry_ecef monitor -->
+    <include file="$(find-pkg-share autoware_topic_state_monitor)/launch/topic_state_monitor.launch.xml">
+        <arg name="node_name_suffix" value="" />
+        <arg name="topic" value="/fixposition/odometry_ecef" />
+        <arg name="topic_type" value="nav_msgs/msg/Odometry" />
+        <arg name="transient_local" value="false" />
+        <arg name="best_effort" value="true" />
+        <arg name="diag_name" value="fixposition_ecef2odom_monitor" />
+        <arg name="warn_rate" value="95.0" />
+        <arg name="error_rate" value="50.0" />
+        <arg name="timeout" value="0.2" />
+        <arg name="window_size" value="10" />
+    </include>
+
+
+    <!-- Nebula continental_detections monitor -->
+    <include file="$(find-pkg-share autoware_topic_state_monitor)/launch/topic_state_monitor.launch.xml">
+        <arg name="node_name_suffix" value="nebula" />
+        <arg name="topic" value="/nebula/continental_objects" />
+        <arg name="topic_type" value="continental_msgs/msg/ContinentalArs548ObjectList" />
+        <arg name="transient_local" value="false" />
+        <arg name="best_effort" value="true" />
+        <arg name="diag_name" value="nebula_continentalDetections_monitor" />
+        <arg name="warn_rate" value="19.0" />
+        <arg name="error_rate" value="18.0" />
+        <arg name="timeout" value="0.5" />
+        <arg name="window_size" value="10" />
+    </include>
+</launch>

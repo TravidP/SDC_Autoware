@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Capture the environment variable from the system and set it as a launch variable -->
+    <let name="VEHICLE" value="$(env VEHICLE)"/>
+    <log message="Launching configuration for $(var VEHICLE)"/>
+
+    <arg name="vehicle_model" default="$(var VEHICLE)_vehicle" description="Vehicle model name"/>
+    <arg name="launch_joy_controller" default="false" description="Whether to launch joy controller (for teleop)"/>
+    <arg name="controller_config_file" default="$(find-pkg-share rt_vehicle_interface)/config/control/joy_controller.param.yaml" description="External controller config files" />
+    <arg name="use_sim_time" default="false"/>
+
+    <group unless="$(var use_sim_time)">
+        <node pkg="rt_vehicle_interface" exec="rt_vehicle_interface" name="rt_vehicle_interface" output="screen" args="$(var VEHICLE)">
+        </node>
+
+        <group if="$(var launch_joy_controller)">
+            <include file="$(find-pkg-share autoware_joy_controller)/launch/joy_controller.launch.xml">
+                <arg name="config_file" value="$(var controller_config_file)"/>
+                <arg name="input_odometry" value="/awsim/ground_truth/localization/kinematic_state"/>
+                <arg name="output_control_command" value="/external/selected/control_cmd"/>
+                <arg name="output_heartbeat" value="/external/selected/heartbeat"/>
+                <arg name="output_gate_mode" value="/control/gate_mode_cmd"/>
+                <arg name="output_gear_cmd" value="external/selected/gear_cmd"/>
+            </include>
+        </group>
+    </group>
+    <group if="$(var use_sim_time)">
+        <include file="$(find-pkg-share autoware_raw_vehicle_cmd_converter)/launch/raw_vehicle_converter.launch.xml"/>
+    </group>
+    <!-- This node operation_mode/state to autonomous -->
+    <node pkg="mock_publisher" exec="mock_publisher"/>
+
+
+</launch>

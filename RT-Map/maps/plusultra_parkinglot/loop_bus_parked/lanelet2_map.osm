@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' generator='JOSM'>
+  <node id='-33869' action='modify' visible='true' lat='51.98389218466' lon='5.66704021181' />
+  <node id='-33874' action='modify' visible='true' lat='51.98365413165' lon='5.66627595047' />
+  <node id='-33889' action='modify' visible='true' lat='51.9837455825' lon='5.66619960371' />
+  <node id='-33890' action='modify' visible='true' lat='51.98398270407' lon='5.66696100727' />
+  <way id='-1458' action='modify' visible='true'>
+    <nd ref='-33874' />
+    <nd ref='-33869' />
+    <tag k='type' v='virtual' />
+  </way>
+  <way id='-1460' action='modify' visible='true'>
+    <nd ref='-33889' />
+    <nd ref='-33890' />
+    <tag k='type' v='virtual' />
+  </way>
+  <relation id='-250' action='modify' visible='true'>
+    <member type='way' ref='-1458' role='right' />
+    <member type='way' ref='-1460' role='left' />
+    <tag k='location' v='urban' />
+    <tag k='one_way' v='yes' />
+    <tag k='region' v='de' />
+    <tag k='speed_limit' v='5' />
+    <tag k='subtype' v='road' />
+    <tag k='type' v='lanelet' />
+  </relation>
+</osm>

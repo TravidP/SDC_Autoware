@@ -1,0 +1,7 @@
+<launch>
+    <arg name="config_file" default="$(find-pkg-share session_recorder)/config/session_recorder.param.yaml"/>
+
+    <node pkg="session_recorder" exec="session_recorder" name="session_recorder" output="screen">
+        <param from="$(var config_file)"/>
+    </node>
+</launch>

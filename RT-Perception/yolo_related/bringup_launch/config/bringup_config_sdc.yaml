@@ -1,0 +1,29 @@
+video_tools:
+  video_source: "camera" # Choices: rosbag2, camera
+  rosbag2_path: ""
+  rosbag2_topics: "/zed/zed_node/rgb_raw/camera_info /zed/zed_node/rgb_raw/image_raw_color /zed/zed_node/depth/camera_info /zed/zed_node/confidence/confidence_map /tf /tf_static /zed/zed_node/depth/depth_registered"
+  svo_path: ""  
+  # "/home/greendinokubra/Documents/zed_recording/HD720_SN34155003_14-04-33.svo"
+  # "/home/greendinokubra/Documents/zed_recording/HD720_SN34155003_14-04-33.svo" 
+  # "/home/greendinokubra/Documents/zed_recording/HD1080_SN34155003_14-10-22.svo"  
+  # "/home/greendinokubra/Documents/zed_recording/HD1080_SN34155003_13-55-59.svo"
+  # "/home/greendinokubra/Downloads/sdc.svo" 
+object_detection_launch:
+  enable_3d_object_detection: "True"
+  rviz: "False"
+
+  model: "sdc_2024_yolo8.pt"
+  tracker: "bytetrack.yaml"
+  device: "cuda:0"
+  enable: "True"
+  threshold: "0.5"
+  image_reliability: "1" # Choices: 0=system default, 1=Reliable, 2=Best Effort
+  depth_image_reliability: "1" # Choices: 0=system default, 1=Reliable, 2=Best Effort
+  depth_info_reliability: "1" # Choices: 0=system default, 1=Reliable, 2=Best Effort
+  depth_image_units_divisor: "1"
+  maximum_detection_threshold: "0.3"
+
+  input_image_topic: "/zed/zed_node/rgb_raw/image_raw_color"
+  input_depth_info_topic: "/zed/zed_node/depth/camera_info"
+  input_depth_topic: "/zed/zed_node/depth/depth_registered"
+  target_frame: "base_link"

@@ -1,0 +1,11 @@
+/**:
+  ros__parameters:
+    bag_directory: "/home/twizy/bag_dir/"
+    map_directory: "/home/twizy/map_dir"
+    topic_names: ["/tf", "/tf_static", "/fixposition/fpa/llh", "/ecef_to_base_link/odometry", "/fixposition/fpa/odometry", "/localization/kinematic_state", "/map/map_projector_info", "/rosout"]
+    # Map creation params
+    speed_limit: 5.0
+    lane_width: 2.0
+    max_nodes_in_way: 3
+    averaging_window_size: 0
+    loop: false

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="map_path"/>
+
+    <node pkg="object_detection_bridge" exec="object_detection_yolo_bridge" name="object_detection_yolo_bridge" output="screen"/>
+
+    <include file="$(find-pkg-share bringup_launch)/launch/twizy_bringup.launch.py">
+        <arg name="map_path" value="$(var map_path)"/>
+    </include>
+</launch>

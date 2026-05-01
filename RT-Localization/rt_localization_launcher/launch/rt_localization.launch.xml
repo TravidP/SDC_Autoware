@@ -1,0 +1,46 @@
+<launch>
+    <arg name="sim" default="false"/>
+
+    <arg name="in_odom" default="/localization/kinematic_state"/>
+    <arg name="out_accel" default="/localization/acceleration"/>
+
+    <include file="$(find-pkg-share autoware_twist2accel)/launch/twist2accel.launch.xml">
+        <arg name="in_odom" value="$(var in_odom)"/>
+        <arg name="out_accel" value="$(var out_accel)"/>
+    </include>
+
+    <group unless="$(var sim)">
+        <log message="Launch configuration: Real hardware"/>
+
+        <include file="$(find-pkg-share autoware_geo_pose_projector)/launch/geo_pose_projector.launch.xml">
+            <arg name="param_path" value="$(find-pkg-share rt_localization_launcher)/config/geo_pose_projector.param.yaml"/>
+            <arg name="input_geo_pose" value="/localization/geopose"/>
+            <arg name="output_pose" value="/localization/pose_with_covariance"/>
+        </include>
+        <include file="$(find-pkg-share ecef_to_geopose_transformation)/launch/ecef2geopose.launch.xml"/>
+        <include file="$(find-pkg-share earth_to_map_transform)/launch/earth_to_map_transform.launch.xml"/>
+        <include file="$(find-pkg-share gd_kinematic_state_publisher)/launch/gd_kinematic_state_publisher.launch.xml"/>
+    </group>
+
+    <group if="$(var sim)">
+        <log message="Launch configuration: Simulation"/>
+        
+        <arg name="odom_topic" default="/awsim/ground_truth/localization/kinematic_state"/>
+        <arg name="child_frame_id" default="base_link"/>
+        <arg name="parent_frame_id" default="map"/>
+        <arg name="override_frame_id" default="true"/>
+
+        <include file="$(find-pkg-share odom_to_tf)/launch/odom_to_tf.launch.xml">
+            <arg name="odom_topic" value="$(var odom_topic)"/>
+            <arg name="child_frame_id" value="$(var child_frame_id)"/>
+            <arg name="parent_frame_id" value="$(var parent_frame_id)"/>
+            <arg name="override_frame_id" value="$(var override_frame_id)"/>
+        </include>
+
+        <arg name="input_topic" default="/awsim/ground_truth/localization/kinematic_state"/>
+        <arg name="output_topic" default="/localization/kinematic_state"/>
+
+        <node pkg="topic_tools" exec="relay" name="kinematic_state_relay" args="$(var input_topic) $(var output_topic)"/>
+    </group>
+
+</launch>

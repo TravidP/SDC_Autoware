@@ -1,0 +1,8 @@
+<launch>
+    <include file="$(find-pkg-share rt_topic_state_monitor)/launch/citaro_sensor_monitor.launch.xml"/>
+
+    <include file="$(find-pkg-share diagnostics_controller)/launch/citaro_diagnostics_controller.launch.xml"/>
+
+    <include file="$(find-pkg-share autoware_default_adapi)/launch/default_adapi.launch.py"/>
+    <include file="$(find-pkg-share autoware_adapi_adaptors)/launch/rviz_adaptors.launch.xml"/>
+</launch>

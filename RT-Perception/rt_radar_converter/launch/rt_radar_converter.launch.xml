@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+    <node pkg="rt_radar_converter" exec="rt_radar_converter" name="rt_radar_converter" output="screen">
+        <param from="$(find-pkg-share rt_radar_converter)/config/rt_radar_converter.param.yaml"/>
+        <remap from="~/input/continental_objects" to="/nebula/continental_objects"/>
+        <remap from="~/output/predicted_objects" to="/perception/object_recognition/objects"/>
+    </node>
+</launch>

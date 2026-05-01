@@ -1,0 +1,8 @@
+/**:
+  ros__parameters:
+    rate: 50 #[Hz] for publishing the result of the lookup
+    source_frame: map #lookup parameter
+    target_frame: base_link #lookup parameter
+    kinematic_state_topic: /localization/kinematic_state #topic for the result of the lookup
+    fixpostion_odometry_topic: /fixposition/odometry_ecef #topic from which odometry is received, used for getting the speed. Frame is important
+    tf_timeout: 5 # seconds to wait for static transforms in node constructor

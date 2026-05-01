@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Arguments for configurable parameters -->
+  <arg name="odom_topic" default="odom" 
+       description="Input Odometry topic name"/>
+  <arg name="parent_frame_id" default="map" 
+       description="Parent frame ID for the TF transform"/>
+  <arg name="child_frame_id" default="base_link" 
+       description="Child frame ID for the TF transform"/>
+  <arg name="override_frame_id" default="false" 
+       description="If true, use parent_frame_id parameter instead of message frame_id"/>
+  <arg name="node_name" default="odom_to_tf_publisher" 
+       description="Name of the node"/>
+  
+  <!-- QoS parameters -->
+  <arg name="qos_reliability" default="best_effort" 
+       description="QoS reliability: 'reliable' or 'best_effort'"/>
+  <arg name="qos_durability" default="volatile" 
+       description="QoS durability: 'volatile' or 'transient_local'"/>
+  <arg name="qos_history_depth" default="10" 
+       description="QoS history depth"/>
+
+  <!-- Launch the odom_to_tf_publisher node -->
+  <node pkg="odom_to_tf" exec="odom_to_tf_publisher" name="$(var node_name)" output="screen">
+    <!-- Remap the input topic -->
+    <remap from="odom" to="$(var odom_topic)"/>
+    
+    <!-- Set parameters -->
+    <param name="parent_frame_id" value="$(var parent_frame_id)"/>
+    <param name="child_frame_id" value="$(var child_frame_id)"/>
+    <param name="override_frame_id" value="$(var override_frame_id)"/>
+    <param name="qos_reliability" value="$(var qos_reliability)"/>
+    <param name="qos_durability" value="$(var qos_durability)"/>
+    <param name="qos_history_depth" value="$(var qos_history_depth)"/>
+  </node>
+</launch>

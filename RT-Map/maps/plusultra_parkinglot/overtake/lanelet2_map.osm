@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' generator='JOSM'>
+  <node id='-33269' action='modify' visible='true' lat='51.9838802792' lon='5.66662912097'>
+    <tag k='ele' v='0.0' />
+    <tag k='mgrs_code' v='31UFU713152' />
+  </node>
+  <node id='-33270' action='modify' visible='true' lat='51.98368320335' lon='5.6667704299'>
+    <tag k='ele' v='0.0' />
+    <tag k='mgrs_code' v='31UFU713152' />
+  </node>
+  <node id='-33271' action='modify' visible='true' lat='51.98332846338' lon='5.66703502107'>
+    <tag k='ele' v='0.0' />
+    <tag k='mgrs_code' v='31UFU713152' />
+  </node>
+  <node id='-33272' action='modify' visible='true' lat='51.98388473215' lon='5.66664647332'>
+    <tag k='ele' v='0.0' />
+    <tag k='mgrs_code' v='31UFU713152' />
+  </node>
+  <node id='-33273' action='modify' visible='true' lat='51.98368787934' lon='5.66678762235'>
+    <tag k='ele' v='0.0' />
+    <tag k='mgrs_code' v='31UFU713152' />
+  </node>
+  <node id='-33274' action='modify' visible='true' lat='51.98333178319' lon='5.66705318595'>
+    <tag k='ele' v='0.0' />
+    <tag k='mgrs_code' v='31UFU713152' />
+  </node>
+  <node id='-33275' action='modify' visible='true' lat='51.98389333045' lon='5.66670272726'>
+    <tag k='ele' v='0.0' />
+    <tag k='mgrs_code' v='31UFU713152' />
+  </node>
+  <node id='-33276' action='modify' visible='true' lat='51.98371817471' lon='5.66682836071'>
+    <tag k='ele' v='0.0' />
+    <tag k='mgrs_code' v='31UFU713152' />
+  </node>
+  <node id='-33277' action='modify' visible='true' lat='51.98333726301' lon='5.66711175328'>
+    <tag k='ele' v='0.0' />
+    <tag k='mgrs_code' v='31UFU713152' />
+  </node>
+  <node id='-33278' action='modify' visible='true' lat='51.9838790252' lon='5.66678786242'>
+    <tag k='ele' v='0.0' />
+    <tag k='mgrs_code' v='31UFU713152' />
+  </node>
+  <node id='-33279' action='modify' visible='true' lat='51.98373470372' lon='5.66689111875'>
+    <tag k='ele' v='0.0' />
+    <tag k='mgrs_code' v='31UFU713152' />
+  </node>
+  <node id='-33280' action='modify' visible='true' lat='51.98336342411' lon='5.66716239873'>
+    <tag k='ele' v='0.0' />
+    <tag k='mgrs_code' v='31UFU713152' />
+  </node>
+  <node id='-33281' action='modify' visible='true' lat='51.98390314621' lon='5.66671571516'>
+    <tag k='ele' v='0.0' />
+    <tag k='mgrs_code' v='31UFU713152' />
+  </node>
+  <node id='-33282' action='modify' visible='true' lat='51.98388874027' lon='5.66680144959'>
+    <tag k='ele' v='0.0' />
+    <tag k='mgrs_code' v='31UFU713152' />
+  </node>
+  <node id='-33283' action='modify' visible='true' lat='51.98381711571' lon='5.66685163237'>
+    <tag k='ele' v='0.0' />
+    <tag k='mgrs_code' v='31UFU713152' />
+  </node>
+  <node id='-33286' action='modify' visible='true' lat='51.98367479379' lon='5.66695277926'>
+    <tag k='ele' v='0.0' />
+    <tag k='mgrs_code' v='31UFU713152' />
+  </node>
+  <node id='-33287' action='modify' visible='true' lat='51.98337484635' lon='5.66717579603'>
+    <tag k='ele' v='0.0' />
+    <tag k='mgrs_code' v='31UFU713152' />
+  </node>
+  <way id='-1115' action='modify' visible='true'>
+    <nd ref='-33269' />
+    <nd ref='-33270' />
+    <nd ref='-33271' />
+    <tag k='subtype' v='solid' />
+    <tag k='type' v='road_border' />
+  </way>
+  <way id='-1116' action='modify' visible='true'>
+    <nd ref='-33272' />
+    <nd ref='-33273' />
+    <nd ref='-33274' />
+    <tag k='subtype' v='solid' />
+    <tag k='type' v='line_thin' />
+  </way>
+  <way id='-1117' action='modify' visible='true'>
+    <nd ref='-33275' />
+    <nd ref='-33276' />
+    <nd ref='-33277' />
+    <tag k='lane_change' v='yes' />
+    <tag k='subtype' v='solid' />
+    <tag k='type' v='line_thin' />
+  </way>
+  <way id='-1118' action='modify' visible='true'>
+    <nd ref='-33275' />
+    <nd ref='-33278' />
+    <nd ref='-33279' />
+    <nd ref='-33280' />
+    <tag k='subtype' v='solid' />
+    <tag k='type' v='line_thin' />
+  </way>
+  <way id='-1119' action='modify' visible='true'>
+    <nd ref='-33281' />
+    <nd ref='-33282' />
+    <nd ref='-33283' />
+    <nd ref='-33286' />
+    <nd ref='-33287' />
+    <tag k='subtype' v='solid' />
+    <tag k='type' v='road_border' />
+  </way>
+  <relation id='-203' action='modify' visible='true'>
+    <member type='way' ref='-1116' role='right' />
+    <member type='way' ref='-1117' role='left' />
+    <tag k='fms_lane_passable' v='false' />
+    <tag k='location' v='urban' />
+    <tag k='name' v='first_road' />
+    <tag k='one_way' v='yes' />
+    <tag k='region' v='de' />
+    <tag k='speed_limit' v='7' />
+    <tag k='subtype' v='road' />
+    <tag k='type' v='lanelet' />
+  </relation>
+  <relation id='-205' action='modify' visible='true'>
+    <member type='way' ref='-1117' role='right' />
+    <member type='way' ref='-1118' role='left' />
+    <tag k='location' v='urban' />
+    <tag k='name' v='road_2' />
+    <tag k='one_way' v='yes' />
+    <tag k='region' v='de' />
+    <tag k='speed_limit' v='7' />
+    <tag k='subtype' v='road' />
+    <tag k='type' v='lanelet' />
+  </relation>
+</osm>

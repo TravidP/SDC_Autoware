@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' generator='JOSM'>
+  <node id='-101757' action='modify' visible='true' lat='51.9831943548' lon='5.66728904709' />
+  <node id='-101758' action='modify' visible='true' lat='51.98393524943' lon='5.66675126418' />
+  <node id='-101759' action='modify' visible='true' lat='51.98381878854' lon='5.66631406412' />
+  <node id='-101760' action='modify' visible='true' lat='51.98372297652' lon='5.66638111934' />
+  <node id='-101761' action='modify' visible='true' lat='51.98380639907' lon='5.66668286785' />
+  <node id='-101762' action='modify' visible='true' lat='51.98318113918' lon='5.66715895995' />
+  <node id='-101888' action='modify' visible='true' lat='51.98383117801' lon='5.66657155618' />
+  <node id='-101889' action='modify' visible='true' lat='51.98386091273' lon='5.66668018565' />
+  <node id='-101959' action='modify' visible='true' lat='51.98321766259' lon='5.66723823864' />
+  <node id='-101960' action='modify' visible='true' lat='51.98311180969' lon='5.66731097794' />
+  <node id='-101961' action='modify' visible='true' lat='51.98320441897' lon='5.66719414242' />
+  <node id='-101962' action='modify' visible='true' lat='51.9830967042' lon='5.66726743825' />
+  <way id='-101782' action='modify' visible='true'>
+    <nd ref='-101757' />
+    <nd ref='-101758' />
+    <nd ref='-101759' />
+    <nd ref='-101760' />
+    <nd ref='-101761' />
+    <nd ref='-101762' />
+    <tag k='area' v='yes' />
+    <tag k='type' v='parking_lot' />
+  </way>
+  <way id='-101987' action='modify' visible='true'>
+    <nd ref='-101888' />
+    <nd ref='-101889' />
+    <tag k='type' v='parking_space' />
+    <tag k='width' v='4' />
+  </way>
+  <way id='-102086' action='modify' visible='true'>
+    <nd ref='-101959' />
+    <nd ref='-101960' />
+    <tag k='subtype' v='solid' />
+    <tag k='type' v='line_thin' />
+  </way>
+  <way id='-102087' action='modify' visible='true'>
+    <nd ref='-101961' />
+    <nd ref='-101962' />
+    <tag k='subtype' v='solid' />
+    <tag k='type' v='line_thin' />
+  </way>
+  <relation id='-99761' action='modify' visible='true'>
+    <member type='way' ref='-102087' role='right' />
+    <member type='way' ref='-102086' role='left' />
+    <tag k='location' v='urban' />
+    <tag k='one_way' v='yes' />
+    <tag k='region' v='de' />
+    <tag k='subtype' v='road' />
+    <tag k='type' v='lanelet' />
+  </relation>
+</osm>

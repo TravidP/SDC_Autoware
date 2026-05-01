@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Capture the environment variable from the system and set it as a launch variable -->
+  <!-- <let name="VEHICLE" value="$(env VEHICLE)"/> -->
+  <arg name="VEHICLE" default="citaro"/>
+
+  <arg name="vehicle_model" default="$(var VEHICLE)_vehicle" description="vehicle model name"/>
+  <arg name="planning_module_preset" default="default"/>
+  <arg name="enable_all_modules_auto_mode" default="false"/>
+  <arg name="pointcloud_container_name" default="pointcloud_container"/>
+  <arg name="vehicle_id" default="1" description="vehicle specific ID"/>
+
+  <include file="$(find-pkg-share gd_citaro_planning)/launch/components/rt_tier4_planning_component.launch.xml">
+    <arg name="module_preset" value="$(var planning_module_preset)"/>
+    <arg name="enable_all_modules_auto_mode" value="$(var enable_all_modules_auto_mode)"/>
+    <arg name="vehicle_model" value="$(var vehicle_model)"/>
+    <arg name="vehicle_id" value="$(var vehicle_id)"/>
+  </include>
+
+</launch>

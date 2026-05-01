@@ -1,0 +1,20 @@
+/**:
+  ros__parameters:
+    debug_mode: false
+    rosbag_length: 10.0
+    maximum_queue_size: 5
+    timeout_sec: 0.1
+    is_motion_compensated: false
+    publish_synchronized_pointcloud: false
+    keep_input_frame_in_synchronized_pointcloud: true
+    publish_previous_but_late_pointcloud: false
+    synchronized_pointcloud_postfix: pointcloud
+    input_twist_topic_type: twist
+    input_topics: [
+                    "/sensing/cropped_cloud_right",
+                    "/sensing/cropped_cloud_left",
+                    "/sensing/zed_cloud_tr"
+                ]
+    output_frame: base_link
+    matching_strategy:
+      type: naive

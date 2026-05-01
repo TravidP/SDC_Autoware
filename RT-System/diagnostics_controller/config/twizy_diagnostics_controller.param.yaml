@@ -1,0 +1,3 @@
+/**:
+  ros__parameters:
+    monitored_names: ["ZED_pointcloud_monitor", "fixposition_ecef2odom_monitor", "ZED_image_monitor"]

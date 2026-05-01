@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+  <node pkg="yolo_autoware_feedback" exec="yolo_feedback" name="yolo_feedback" output="log" />
+</launch>
+
+

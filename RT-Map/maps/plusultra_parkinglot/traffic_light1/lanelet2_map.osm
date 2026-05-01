@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<osm version='0.6' generator='JOSM'>
+  <node id='-33845' action='modify' visible='true' lat='51.98419529338' lon='5.66623341313'>
+    <tag k='ele' v='0.0' />
+  </node>
+  <node id='-33846' action='modify' visible='true' lat='51.98366120311' lon='5.66663030921'>
+    <tag k='ele' v='0.0' />
+  </node>
+  <node id='-33847' action='modify' visible='true' lat='51.98342759605' lon='5.66679167057'>
+    <tag k='ele' v='0.0' />
+  </node>
+  <node id='-33848' action='modify' visible='true' lat='51.98430465835' lon='5.66663835424'>
+    <tag k='ele' v='0.0' />
+  </node>
+  <node id='-33849' action='modify' visible='true' lat='51.98378745739' lon='5.66702380092'>
+    <tag k='ele' v='0.0' />
+  </node>
+  <node id='-33850' action='modify' visible='true' lat='51.98353136641' lon='5.66722306495'>
+    <tag k='ele' v='0.0' />
+  </node>
+  <node id='-33861' action='modify' visible='true' lat='51.98367336342' lon='5.66668329978'>
+    <tag k='ele' v='0.0' />
+  </node>
+  <node id='-33862' action='modify' visible='true' lat='51.9836682747' lon='5.66667004458'>
+    <tag k='ele' v='0.0' />
+  </node>
+  <node id='-33863' action='modify' visible='true' lat='51.98367598954' lon='5.6666902142'>
+    <tag k='ele' v='0.0' />
+  </node>
+  <node id='-33864' action='modify' visible='true' lat='51.98367850225' lon='5.66669649716'>
+    <tag k='ele' v='0.0' />
+  </node>
+  <node id='-33865' action='modify' visible='true' lat='51.98367087057' lon='5.66667673626'>
+    <tag k='ele' v='0.0' />
+  </node>
+  <node id='-33873' action='modify' visible='true' lat='51.98380222222' lon='5.666531371' />
+  <node id='-33874' action='modify' visible='true' lat='51.98391158844' lon='5.6669281678' />
+  <way id='-5200' action='modify' visible='true'>
+    <nd ref='-33873' />
+    <nd ref='-33846' />
+    <tag k='subtype' v='solid' />
+    <tag k='type' v='line_thin' />
+  </way>
+  <way id='-5201' action='modify' visible='true'>
+    <nd ref='-33874' />
+    <nd ref='-33849' />
+    <tag k='lane_change' v='yes' />
+    <tag k='subtype' v='solid' />
+    <tag k='type' v='line_thin' />
+  </way>
+  <way id='-5205' action='modify' visible='true'>
+    <nd ref='-33865' />
+    <nd ref='-33861' />
+    <nd ref='-33863' />
+    <tag k='traffic_light_id' v='0' />
+    <tag k='type' v='light_bulbs' />
+  </way>
+  <way id='-5206' action='modify' visible='true'>
+    <nd ref='-33862' />
+    <nd ref='-33864' />
+    <tag k='height' v='0.45' />
+    <tag k='subtype' v='red_yellow_green' />
+    <tag k='type' v='traffic_light' />
+  </way>
+  <way id='-5216' action='modify' visible='true'>
+    <nd ref='-33873' />
+    <nd ref='-33874' />
+    <tag k='type' v='stop_line' />
+  </way>
+  <way id='-5260' action='modify' visible='true'>
+    <nd ref='-33845' />
+    <nd ref='-33873' />
+    <tag k='subtype' v='solid' />
+    <tag k='type' v='line_thin' />
+  </way>
+  <way id='-5263' action='modify' visible='true'>
+    <nd ref='-33848' />
+    <nd ref='-33874' />
+    <tag k='lane_change' v='yes' />
+    <tag k='subtype' v='solid' />
+    <tag k='type' v='line_thin' />
+  </way>
+  <way id='-5267' action='modify' visible='true'>
+    <nd ref='-33849' />
+    <nd ref='-33850' />
+    <tag k='lane_change' v='yes' />
+    <tag k='subtype' v='solid' />
+    <tag k='type' v='line_thin' />
+  </way>
+  <way id='-5270' action='modify' visible='true'>
+    <nd ref='-33846' />
+    <nd ref='-33847' />
+    <tag k='subtype' v='solid' />
+    <tag k='type' v='line_thin' />
+  </way>
+  <relation id='-725' action='modify' visible='true'>
+    <member type='way' ref='-5270' role='right' />
+    <member type='way' ref='-5267' role='left' />
+    <tag k='fms_lane_passable' v='false' />
+    <tag k='location' v='urban' />
+    <tag k='name' v='first_road' />
+    <tag k='one_way' v='yes' />
+    <tag k='region' v='de' />
+    <tag k='speed_limit' v='7' />
+    <tag k='subtype' v='road' />
+    <tag k='type' v='lanelet' />
+  </relation>
+  <relation id='-726' action='modify' visible='true'>
+    <member type='way' ref='-5216' role='ref_line' />
+    <member type='way' ref='-5205' role='light_bulbs' />
+    <member type='way' ref='-5206' role='refers' />
+    <tag k='subtype' v='traffic_light' />
+    <tag k='type' v='regulatory_element' />
+  </relation>
+  <relation id='-737' action='modify' visible='true'>
+    <member type='way' ref='-5260' role='right' />
+    <member type='way' ref='-5263' role='left' />
+    <tag k='fms_lane_passable' v='false' />
+    <tag k='location' v='urban' />
+    <tag k='name' v='first_road' />
+    <tag k='one_way' v='yes' />
+    <tag k='region' v='de' />
+    <tag k='speed_limit' v='7' />
+    <tag k='subtype' v='road' />
+    <tag k='type' v='lanelet' />
+  </relation>
+  <relation id='-739' action='modify' visible='true'>
+    <member type='relation' ref='-726' role='regulatory_element' />
+    <member type='way' ref='-5200' role='right' />
+    <member type='way' ref='-5201' role='left' />
+    <tag k='fms_lane_passable' v='false' />
+    <tag k='location' v='urban' />
+    <tag k='name' v='first_road' />
+    <tag k='one_way' v='yes' />
+    <tag k='region' v='de' />
+    <tag k='speed_limit' v='7' />
+    <tag k='subtype' v='road' />
+    <tag k='type' v='lanelet' />
+  </relation>
+</osm>
