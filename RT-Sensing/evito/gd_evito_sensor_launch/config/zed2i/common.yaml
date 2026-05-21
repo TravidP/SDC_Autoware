@@ -38,9 +38,9 @@
             saturation: 4 # [DYNAMIC]
             sharpness: 4 # [DYNAMIC]
             gamma: 8 # [DYNAMIC]
-            auto_exposure_gain: true # [DYNAMIC]
-            exposure: 80 # [DYNAMIC]
-            gain: 80 # [DYNAMIC]
+            auto_exposure_gain: false #true # [DYNAMIC]
+            exposure: 30 #80 # [DYNAMIC]
+            gain: 15 #80 # [DYNAMIC]
             auto_whitebalance: true # [DYNAMIC]
             whitebalance_temperature: 42 # [DYNAMIC] - [28,65] works only if `auto_whitebalance` is false
 
